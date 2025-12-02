@@ -13,6 +13,12 @@
 #include "os_types.h"
 #include "os_cfg.h"
 
+/***********************************************************************************************
+ *                                     PRE-PROCESSOR MACROS
+ ***********************************************************************************************/
+#define SET_READY(bitmap, priority)             (bitmap |= (1 << priority))
+#define CLEAR_READY(bitmap, priority)           (bitmap &= ~(1 << priority))
+
 
 /***********************************************************************************************
  *                                        PUBLIC ENUMS
@@ -50,7 +56,6 @@ typedef TaskStateType* TaskStateRefType;
 typedef struct TaskType
 {
     os_uint8_t task_id;
-    os_bool is_activated;
     OsPriorityType priority;
     os_entry_point entry_point;
     TaskStateType state;
@@ -60,7 +65,7 @@ typedef struct TaskType
     os_uin32_t task_stack_budget; // in bytes
 } TaskType;
 
-typedef TaskStateType* TaskRefType;
+typedef TaskType* TaskRefType;
 
 
 /***********************************************************************************************
