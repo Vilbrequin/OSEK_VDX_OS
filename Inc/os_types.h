@@ -12,6 +12,10 @@ typedef unsigned char os_uint8_t;
 
 typedef unsigned long os_uin32_t;
 
+typedef os_uint8_t OsPriorityType;
+
+typedef void (*os_entry_point)(void);
+
 typedef unsigned long os_bool;
 
 #define FALSE   0x00

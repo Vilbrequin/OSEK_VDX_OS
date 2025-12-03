@@ -23,13 +23,15 @@
 /***********************************************************************************************
  *                                        PUBLIC ENUMS
  ***********************************************************************************************/
-typedef enum TaskStateType {
+enum TaskStateType {
     SUSPENDED = 0x00,
     READY,
     RUNNING
-} TaskStateType;
+};
 
-typedef enum StatusType {
+typedef enum TaskStateType TaskStateType;
+
+enum StatusType {
     E_OK = 0x00,
     E_OS_ACCESS,
     E_OS_CALLEVEL,
@@ -39,14 +41,8 @@ typedef enum StatusType {
     E_OS_RESOURCE, 
     E_OS_STATE,  
     E_OS_VALUE
-} StatusType;
-
-/***********************************************************************************************
- *                                        PRIVATE TYPES
- ***********************************************************************************************/
-typedef os_uint8_t OsPriorityType;
-
-typedef void (*os_entry_point)(void);
+};
+typedef enum StatusType StatusType;
 
 /***********************************************************************************************
  *                                        PUBLIC TYPES
@@ -61,12 +57,14 @@ typedef struct TaskType
     TaskStateType state;
 
     os_uin32_t* task_sp; // current saved stack pointer
+    os_uin32_t* task_init_sp; // current saved stack pointer
     os_uin32_t* task_stack_base; // base address of the task's stack frame
     os_uin32_t task_stack_budget; // in bytes
 } TaskType;
 
 typedef TaskType* TaskRefType;
 
+typedef os_uint8_t AppModeType;
 
 /***********************************************************************************************
  *                                        OS GLOBALS
@@ -84,7 +82,7 @@ StatusType ChainTask ( TaskType TaskID );
 StatusType Schedule ( void );
 StatusType GetTaskID ( TaskRefType TaskID );
 StatusType GetTaskState ( TaskType TaskID,  TaskStateRefType State );
-
+void StartOS ( AppModeType Mode );
 /***********************************************************************************************
  *                                       PRIVATE SERVICES
  ***********************************************************************************************/

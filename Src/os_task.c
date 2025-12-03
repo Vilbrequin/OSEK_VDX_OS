@@ -25,7 +25,7 @@ StatusType ActivateTask(TaskType TaskID)
 
         SET_READY(readyBitMap, task->priority);
 
-        task->task_sp = task->task_stack_base;
+        task->task_sp = task->task_init_sp;
 
         Os_Dispatch(); // call the scheduler
 
@@ -78,7 +78,7 @@ StatusType ChainTask(TaskType TaskID)
     // now ready 
     succ->state = READY;
 
-    succ->task_sp = succ->task_stack_base;
+    succ->task_sp = succ->task_init_sp;
 
     SET_READY(readyBitMap, succ->priority);
 

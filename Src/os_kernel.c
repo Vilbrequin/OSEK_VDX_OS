@@ -18,3 +18,8 @@ os_uin32_t readyBitMap = 0;
 TaskRefType RunningTask = NULL;
 
 TaskType TasksTab[OS_NUM_TASKS];
+
+
+void StartOS ( AppModeType Mode ){
+    
+}
