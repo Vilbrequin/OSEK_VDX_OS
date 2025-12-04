@@ -86,3 +86,20 @@ StatusType ChainTask(TaskType TaskID)
 
     return E_OK;
 }
+
+StatusType GetTaskID ( TaskRefType TaskID ){
+    TaskID = RunningTask;
+    return E_OK;
+}
+
+StatusType GetTaskState ( TaskType TaskID,  TaskStateRefType State ){
+    if (TaskID.task_id >= OS_NUM_TASKS)
+    {
+        return E_OS_ID;
+    }
+
+    TaskType* task = &TasksTab[TaskID.task_id];
+    State = &task->state;
+
+    return E_OK;
+}
